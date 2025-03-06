@@ -1,0 +1,202 @@
+body{
+    background-image: 
+        linear-gradient(
+            to top right, #111111, #1a1a1a
+        );
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    transition: background-image 0.3s ease;
+}
+.slider{
+    position: relative;
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+}
+.item{
+    position: absolute;
+    width: 340px;
+    height: 420px;
+    text-align: justify;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.5s ease, transform 0.5s ease;
+    left: calc(50% - 180px);
+    top: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+#next, #prev {
+    position: absolute;
+    top: 40%;
+    background-color: transparent;
+    border: none;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    left: 500px;
+}
+#next {
+    left: unset;
+    right: 500px;
+}
+#next::before, #prev::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-left: 0;
+    border-bottom: 0;
+    top: 50%;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+#next::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+#prev::before {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+#next:hover::before, #prev:hover::before {
+    width: 35px;
+    height: 35px;
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 2px -2px 8px rgba(255, 255, 255, 0.2);
+}
+#next:active::before, #prev:active::before {
+    width: 28px;
+    height: 28px;
+    border-color: rgba(255, 255, 255, 1);
+}
+.slider::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Dark mode toggle styling */
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider-switch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: 0.4s;
+    border-radius: 34px;
+    overflow: hidden;
+}
+
+.slider-switch:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 1px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.moon-icon, .sun-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: 0.4s;
+}
+
+.moon-icon {
+    left: 7px;
+}
+
+.sun-icon {
+    right: 7px;
+}
+
+input:checked + .slider-switch:before {
+    transform: translateX(30px);
+}
+
+/* Light mode styles */
+body.light-mode {
+    background-image: linear-gradient(to top right, #e5e5e5, #ffffff);
+}
+
+body.light-mode .item {
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+body.light-mode #next::before, 
+body.light-mode #prev::before {
+    border-color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-mode #next:hover::before, 
+body.light-mode #prev:hover::before {
+    border-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 2px -2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider-switch:hover {
+    transform: scale(1.05);
+}
+
+/* Update text colors for light mode */
+body.light-mode .item h1 {
+    color: #1a1a1a;
+}
+
+/* Add a subtle border in light mode for better definition */
+body.light-mode .item {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure active card is more prominent in light mode */
+body.light-mode .item[style*="z-index: 1"] {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover effect for cards in light mode */
+body.light-mode .item:hover {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
